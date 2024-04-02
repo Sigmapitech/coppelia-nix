@@ -69,6 +69,13 @@
 
         packages =
           let
+            py-run = pkgs.writers.writePython3Bin "py-run" {} ''
+              import os
+
+              os.chdir(os.environ["COPPELIA_DIR"])
+              os.system("./coppeliaSim.sh")
+            '';
+
             coppelia-sim = pkgs.stdenv.mkDerivation {
               name = "coppelia-sim";
               src = coppelia-sim-tar;
@@ -84,6 +91,7 @@
               '';
 
               nativeBuildInputs = [ pkgs.makeWrapper ];
+              patches = [ ./coppelia-fix-appname.patch ];
 
               postFixup = ''
                 wrapProgram $out/coppeliaSim \
@@ -91,6 +99,12 @@
 
                 wrapProgram $out/libLoadErrorCheck.sh \
                   --set LD_LIBRARY_PATH "$out:${lib-path}"
+
+                mkdir -p $out/bin
+                cp ${py-run}/bin/py-run $out/bin/coppelia-sim;
+                wrapProgram $out/bin/coppelia-sim \
+                  --set COPPELIA_DIR "$out" \
+                  --set QT_DEBUG_PLUGINS 1
               '';
            };
          in {
