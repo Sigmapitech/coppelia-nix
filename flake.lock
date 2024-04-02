@@ -1,5 +1,18 @@
 {
   "nodes": {
+    "coppelia-sim-tar": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1595332437,
+        "narHash": "sha256-5Ll6HQr0GvuIUSJlw1rLjmOHX3orSKhVnmbQPXzgLrw=",
+        "type": "tarball",
+        "url": "https://downloads.coppeliarobotics.com/V4_1_0/CoppeliaSim_Edu_V4_1_0_Ubuntu20_04.tar.xz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://downloads.coppeliarobotics.com/V4_1_0/CoppeliaSim_Edu_V4_1_0_Ubuntu20_04.tar.xz"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -36,6 +49,7 @@
     },
     "root": {
       "inputs": {
+        "coppelia-sim-tar": "coppelia-sim-tar",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs"
       }
