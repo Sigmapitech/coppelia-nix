@@ -1,17 +1,13 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    nixpkgs-qt515.url = "github:NixOS/nixpkgs/983465f13a42075925f78c69950b79d4e41397b5";
-
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { nixpkgs, nixpkgs-qt515, flake-utils, ... }:
+  outputs = { nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        pkgs-qt515 = nixpkgs-qt515.legacyPackages.${system};
-
         zlib129 = pkgs.stdenv.mkDerivation rec {
           pname = "zlib";
           version = "1.2.9";
@@ -54,8 +50,8 @@
           xorg.libXrender
           xorg.libXcursor
         ] ++ [
-          pkgs-qt515.qt5.qtbase
-          pkgs-qt515.qt5.qtsvg
+          libsForQt5.qt5.qtbase
+          libsForQt5.qt5.qtsvg
         ]);
       in
       {

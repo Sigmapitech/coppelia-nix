@@ -34,27 +34,10 @@
         "type": "github"
       }
     },
-    "nixpkgs-qt515": {
-      "locked": {
-        "lastModified": 1605948883,
-        "narHash": "sha256-L8dHV2FzKc7Gu/p2gMnkOTMnIhXQuatvmIchdglCFGo=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "983465f13a42075925f78c69950b79d4e41397b5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "983465f13a42075925f78c69950b79d4e41397b5",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs",
-        "nixpkgs-qt515": "nixpkgs-qt515"
+        "nixpkgs": "nixpkgs"
       }
     },
     "systems": {
