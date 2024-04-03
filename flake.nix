@@ -9,8 +9,22 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
 
+        lib-path = let
+          xorg-deps = with pkgs.xorg; [
+            libX11
+            libXau
+            libXcursor
+            libXdmcp
+            libXrender
+            libxcb
+          ];
 
-        lib-path = with pkgs; lib.makeLibraryPath ([
+         qt-deps = with pkgs.libsForQt5; [
+          qtbase
+          qtsvg
+         ];
+
+        in with pkgs; lib.makeLibraryPath ([
           dbus
           ffmpeg_4.lib
           fontconfig
@@ -21,14 +35,7 @@
           libxkbcommon
           stdenv.cc.cc
           zlib
-        ] ++ [
-          xorg.libX11
-          xorg.libXau
-          xorg.libXcursor
-          xorg.libXdmcp
-          xorg.libXrender
-          xorg.libxcb
-        ]);
+        ] ++ xorg-deps ++ qt-deps);
       in
       {
         formatter = pkgs.nixpkgs-fmt;
