@@ -11,20 +11,23 @@
 
 
         lib-path = with pkgs; lib.makeLibraryPath ([
-          stdenv.cc.cc
-          glib
-          libGL
+          dbus
+          ffmpeg_4.lib
           fontconfig
           freetype
+          glib
+          libGL
+          libkrb5
           libxkbcommon
-          dbus
+          stdenv.cc.cc
           zlib
-          ffmpeg_4.lib
         ] ++ [
-          xorg.libxcb
           xorg.libX11
-          xorg.libXrender
+          xorg.libXau
           xorg.libXcursor
+          xorg.libXdmcp
+          xorg.libXrender
+          xorg.libxcb
         ]);
       in
       {
