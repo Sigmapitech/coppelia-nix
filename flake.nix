@@ -9,31 +9,6 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
 
-        zlib129 = pkgs.stdenv.mkDerivation rec {
-          pname = "zlib";
-          version = "1.2.9";
-
-          src = pkgs.fetchurl {
-            url = "https://www.zlib.net/fossils/zlib-${version}.tar.gz";
-            hash = "sha256-c6swLvMe0edIldKvVvUvWFPyawNw8+8hlUNHrOxeqiE=";
-          };
-
-          strictDeps = true;
-          outputs = [ "out" ];
-          setOutputFlags = false;
-
-          configureFlags = [ "--shared" ];
-          dontDisableStatic = true;
-          dontAddStaticConfigureFlags = true;
-          configurePlatforms = [ ];
-          enableParallelBuilding = true;
-          doCheck = true;
-
-          makeFlags = [
-            "PREFIX=${pkgs.stdenv.cc.targetPrefix}"
-            "SHARED_MODE=1"
-          ];
-        };
 
         lib-path = with pkgs; lib.makeLibraryPath ([
           stdenv.cc.cc
@@ -43,7 +18,7 @@
           freetype
           libxkbcommon
           dbus
-          zlib129
+          zlib
           ffmpeg_4.lib
         ] ++ [
           xorg.libxcb
